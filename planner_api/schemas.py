@@ -3,6 +3,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+
 class Planner(BaseModel):
     id: int
     original_id: str
@@ -24,5 +25,6 @@ class Planner(BaseModel):
     required_skills: dict
     optional_skills: dict
     is_unassigned: bool
+
     class Config:
         orm_mode = True

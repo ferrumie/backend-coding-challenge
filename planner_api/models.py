@@ -32,4 +32,4 @@ class Planner(Base):
         return "<Planner(talent_name='%s', talent_id='%s')>" % (
             self.talent_name,
             self.talent_id,
-       )
+        )

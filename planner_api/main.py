@@ -4,7 +4,6 @@ from fastapi_pagination import Page, paginate, add_pagination
 from planner_api.database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from sqlalchemy import text, or_
-from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 
 models.Base.metadata.create_all(bind=engine)
@@ -29,14 +28,19 @@ def get_db():
     finally:
         db.close()
 
+@app.get("/ping")
+def pong(db: Session = Depends(get_db)):
+    qs = db.query(models.Planner)
+    breakpoint()
+    return paginate(qs.all())
 
-@app.get("/planners/", name="List all planners", response_model=Page[schemas.Planner])
+
+@app.get("/planners", name="List all planners", response_model=Page[schemas.Planner])
 def list_planners(
     db: Session = Depends(get_db),
     sort: str = Query(None, alias='sort'),
     filter: str = Query(None, alias='filter'),
-
-    ):
+) -> Page:
     """Get list of all planners"""
     if sort is not None:
         qs = db.query(models.Planner).order_by(text(sort))
@@ -48,8 +52,8 @@ def list_planners(
         for key, value in pair.items():
             _key = getattr(models.Planner, key)
             search = "%{}%".format(value)
-            pair_list.append(_key.like(search)) 
-             
+            pair_list.append(_key.like(search))
+
         qs = db.query(models.Planner).filter(or_(*pair_list))
     else:
         qs = db.query(models.Planner)

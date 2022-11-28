@@ -84,12 +84,14 @@ For any additional questions on the task please feel free to email
     >> Python 3.x.x
     ```
 *   Install virtualenv or pipenv:
-  ```
+  	```
     pip install virtualenv
-    ```
+    	```
 *    Create a virtual enviroment
   you can create one with virtualenv using
-  `virtualenv venv`
+  	```
+	virtualenv venv
+	```
   or
 	```
 	python3 -m venv venv

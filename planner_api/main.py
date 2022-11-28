@@ -30,13 +30,6 @@ def get_db():
         db.close()
 
 
-@app.get("/ping")
-def pong(db: Session = Depends(get_db)):
-    qs = db.query(models.Planner)
-    breakpoint()
-    return paginate(qs.all())
-
-
 @app.get("/planners", name="List all planners", response_model=Page[schemas.Planner])
 def list_planners(
     db: Session = Depends(get_db),
@@ -55,7 +48,6 @@ def list_planners(
             _key = getattr(models.Planner, key)
             search = "%{}%".format(value)
             pair_list.append(_key.like(search))
-
         qs = db.query(models.Planner).filter(or_(*pair_list))
     else:
         qs = db.query(models.Planner)

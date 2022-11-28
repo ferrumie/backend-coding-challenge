@@ -28,6 +28,7 @@ def get_db():
     finally:
         db.close()
 
+
 @app.get("/ping")
 def pong(db: Session = Depends(get_db)):
     qs = db.query(models.Planner)

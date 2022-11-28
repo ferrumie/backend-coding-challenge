@@ -23,12 +23,12 @@ def test_list_planners():
 
     for obj in json_obj[:10]:
         planner_record = models.Planner(
-                    original_id=obj['originalId'],
-                    operational_unit=obj['operatingUnit'],
-                    office_postal_code=obj['officePostalCode'],
-                    total_hours=obj['totalHours'],
-                    client_id=obj['clientId'],
-                )
+            original_id=obj['originalId'],
+            operational_unit=obj['operatingUnit'],
+            office_postal_code=obj['officePostalCode'],
+            total_hours=obj['totalHours'],
+            client_id=obj['clientId'],
+        )
         db.add(planner_record)
     db.commit()
 
@@ -36,6 +36,7 @@ def test_list_planners():
     assert response.status_code == 200
     assert response.json() == {'items': [], 'page': 1, 'size': 50, 'total': 0}
     db.close()
+
 
 def test_list_planners_with_filter():
     # create model
@@ -45,12 +46,12 @@ def test_list_planners_with_filter():
 
     for obj in json_obj[:10]:
         planner_record = models.Planner(
-                    original_id=obj['originalId'],
-                    operational_unit=obj['operatingUnit'],
-                    office_postal_code=obj['officePostalCode'],
-                    total_hours=obj['totalHours'],
-                    client_id=obj['clientId'],
-                )
+            original_id=obj['originalId'],
+            operational_unit=obj['operatingUnit'],
+            office_postal_code=obj['officePostalCode'],
+            total_hours=obj['totalHours'],
+            client_id=obj['clientId'],
+        )
         db.add(planner_record)
     db.commit()
 
@@ -58,6 +59,7 @@ def test_list_planners_with_filter():
     assert response.status_code == 200
     assert response.json() == {'items': [], 'page': 1, 'size': 50, 'total': 0}
     db.close()
+
 
 def test_list_planners_with_sort():
     # create model
@@ -67,12 +69,12 @@ def test_list_planners_with_sort():
 
     for obj in json_obj[:10]:
         planner_record = models.Planner(
-                    original_id=obj['originalId'],
-                    operational_unit=obj['operatingUnit'],
-                    office_postal_code=obj['officePostalCode'],
-                    total_hours=obj['totalHours'],
-                    client_id=obj['clientId'],
-                )
+            original_id=obj['originalId'],
+            operational_unit=obj['operatingUnit'],
+            office_postal_code=obj['officePostalCode'],
+            total_hours=obj['totalHours'],
+            client_id=obj['clientId'],
+        )
         db.add(planner_record)
     db.commit()
 

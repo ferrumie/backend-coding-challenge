@@ -11,8 +11,10 @@ from planner_api.main import get_db
 
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
-#this is to include backend dir in sys.path so that we can import from db,main.py
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# this is to include backend dir in sys.path so that we can import from db,main.py
+
 
 def start_application():
     app = FastAPI()
@@ -20,11 +22,10 @@ def start_application():
 
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test_db.db"
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 # Use connect_args parameter only with sqlite
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 
 def override_get_db():
     try:
@@ -74,6 +75,7 @@ def client(session):
     app.dependency_overrides[get_db] = override_get_db
 
     yield TestClient(app)
+
 
 @pytest.fixture()
 def test_db():

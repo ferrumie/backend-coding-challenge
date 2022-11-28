@@ -66,3 +66,97 @@ in `planning.json`, which contains around 10k records.
 
 For any additional questions on the task please feel free to email
 `sundara.amancharla@aspaara.com`.
+
+## STEPS TO RUNNING THE APP
+
+## Technology Stack
+
+* FastAPI
+* SQLAchemy
+* SQLITE
+* fastapi-pagination
+
+###  Setting Up For Local Development
+
+*   Check that python 3 is installed:
+    ```
+    python --version
+    >> Python 3.x.x
+    ```
+*   Install virtualenv or pipenv:
+  ```
+    pip install virtualenv
+    ```
+*    Create a virtual enviroment
+  you can create one with virtualenv using
+  `virtualenv venv`
+  or
+	```
+	python3 -m venv venv
+	```
+*   Activate the virtual enviroment:
+    - On Linux/Mac:
+	    ```
+	    source venv/bin/activate
+	    ```
+    -  On Windows:
+      ```
+	    venv/scripts/activate
+	    ```
+	Feel free to use other tools such as pipenv
+
+*   Install dependencies from requirements.txt file:
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+*   Ensure you are in the root folder and Run the application with the command
+
+    ```
+    uvicorn planner_api.main:app --reload
+    ```
+
+*   To load the sqlite db run the following command
+    ```
+    python populate_db.py 
+    ```
+
+*   To check the list of the planners go the this route on your browser after running the uvicorn server
+    ```
+    http://127.0.0.1:8000/planners
+    ```
+
+*   You can check the documentation on how to filter, sort, or change the default pagination parameters
+    ```
+    http://127.0.0.1:8000/docs
+    ```
+
+*   To run the app test
+    ```
+    python -m pytest tests/ 
+    ```
+
+## Pagination
+
+* pagination is applied by default with size of 50 and page of 1,
+* To change the default pagination, specify the queryparam `size` or `page` with the desired number
+    ```
+    http://127.0.0.1:8000/planners?size=10&page=1
+    ```
+
+## Filter and Sort
+* To sort, use the `sort`  query parameter, providing the value you want to sort as
+    ```
+    http://127.0.0.1:8000/planners?sort=talent_name
+    ```
+
+* To filter, use the `filter`  query parameter, providing the value you want to filter as in this form `filter=query_key,query_value-another_query_key,another_query_value`
+  For example
+    ```
+    http://127.0.0.1:8000/planners?filter=industry,Retail
+    ```
+    or 
+    ```
+    http://127.0.0.1:8000/planners?filter=industry,Retail-talent_id,tln_7794
+    ```

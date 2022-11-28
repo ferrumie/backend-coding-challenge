@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Depends, Query
-from planner_api import models, schemas
-from fastapi_pagination import Page, paginate, add_pagination
-from planner_api.database import engine, SessionLocal
-from sqlalchemy.orm import Session
-from sqlalchemy import text, or_
+from fastapi import Depends, FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_pagination import Page, add_pagination, paginate
+from sqlalchemy import or_, text
+from sqlalchemy.orm import Session
+
+from planner_api import models, schemas
+from planner_api.database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 

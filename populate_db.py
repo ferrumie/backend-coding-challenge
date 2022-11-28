@@ -1,8 +1,9 @@
+import datetime
 import json
 import sys
-import datetime
-from planner_api.database import SessionLocal, engine
+
 from planner_api import models
+from planner_api.database import SessionLocal, engine
 
 db = SessionLocal()
 
